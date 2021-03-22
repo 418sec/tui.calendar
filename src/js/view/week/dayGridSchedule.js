@@ -5,6 +5,7 @@
 'use strict';
 
 var util = require('tui-code-snippet');
+var dompurify = require('dompurify');
 var Weekday = require('../weekday'),
     tmpl = require('../template/week/dayGridSchedule.hbs');
 var mmax = Math.max;
@@ -38,7 +39,7 @@ DayGridSchedule.prototype.render = function(viewModel) {
 
     baseViewModel = this.getBaseViewModel(viewModel);
 
-    container.innerHTML = tmpl(baseViewModel);
+    container.innerHTML = dompurify.sanitize(tmpl(baseViewModel));
 
     this.fire('afterRender', baseViewModel);
 };

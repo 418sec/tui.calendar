@@ -5,6 +5,7 @@
 'use strict';
 
 var util = require('tui-code-snippet');
+var dompurify = require('dompurify');
 var config = require('../config'),
     domutil = require('../common/domutil'),
     View = require('../view/view');
@@ -143,7 +144,7 @@ FloatingLayer.prototype.setSize = function(w, h) {
  * @param {string} html - html string
  */
 FloatingLayer.prototype.setContent = function(html) {
-    this.container.innerHTML = html;
+    this.container.innerHTML = dompurify.sanitize(html);
 };
 
 /**
