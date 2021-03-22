@@ -5,6 +5,7 @@
 'use strict';
 
 var util = require('tui-code-snippet');
+var dompurify = require('dompurify');
 var config = require('../../config');
 var datetime = require('../../common/datetime');
 var domutil = require('../../common/domutil');
@@ -308,11 +309,11 @@ Time.prototype.getDate = function() {
  */
 Time.prototype.render = function(ymd, matrices, containerHeight) {
     this._getBaseViewModel(ymd, matrices, containerHeight);
-    this.container.innerHTML = this.timeTmpl({
+    this.container.innerHTML = dompurify.sanitize(this.timeTmpl({
         matrices: matrices,
         styles: this._getStyles(this.theme),
         isReadOnly: this.options.isReadOnly
-    });
+    }));
 };
 
 /**
